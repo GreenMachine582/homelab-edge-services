@@ -1,5 +1,11 @@
 # homelab-edge-services
 
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white)
+![Caddy](https://img.shields.io/badge/Caddy-1F88C0?logo=caddy&logoColor=white)
+![Pi-hole](https://img.shields.io/badge/Pi--hole-96060C?logo=pi-hole&logoColor=white)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=white)
+![Self-hosted](https://img.shields.io/badge/self--hosted-homelab-4A90D9)
+
 Network appliance tier for the `homelab-edge` node: DNS (Pi-hole + Unbound), LAN reverse proxy (Caddy), Cloudflare Tunnel (cloudflared), and supporting exporters.
 
 Config-only repo — no custom images are built. All images are upstream.
@@ -88,17 +94,19 @@ Secrets pulled from Infisical at deploy time:
 
 ## IP change procedure
 
-When a backend node's IP changes:
+Caddy backend IPs (`IP_OBSERVE`, `IP_SVC_01`, `IP_SVC_02`, `IP_SVC_03`) are injected at deploy time from Infisical — no git change needed:
 
-1. Update the relevant `reverse_proxy` line(s) in `configs/caddy/Caddyfile`.
-2. Update the relevant `service:` line(s) in `configs/cloudflared/config.yml` if the node has public tunnel routes.
-3. Deploy:
+1. Update the value in Infisical (`/production/network/IP_*`).
+2. Deploy:
 
    ```
    deploy-service deploy homelab-edge-services
    ```
 
-If the edge node IP (`192.168.50.192`) changes, update every entry in `configs/pihole/custom.list` and the Caddy port binding as well.
+**Exceptions that still require a git change:**
+
+- **cloudflared** (`configs/cloudflared/config.yml`) — the cloudflared image is distroless (no shell/envsubst); its 2 backend IPs are hardcoded. Edit the file and redeploy.
+- **Pi-hole custom DNS** (`configs/pihole/custom.list`) — uses `ip_edge` (192.168.50.192, the edge node itself). If this IP changes, update every entry here and redeploy.
 
 ---
 

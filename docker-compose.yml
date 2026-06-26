@@ -13,6 +13,11 @@ services:
     image: caddy:2
     container_name: caddy
     restart: unless-stopped
+    environment:
+      IP_OBSERVE: "${IP_OBSERVE}"
+      IP_SVC_01: "${IP_SVC_01}"
+      IP_SVC_02: "${IP_SVC_02}"
+      IP_SVC_03: "${IP_SVC_03}"
     ports:
       - "80:80"
       - "443:443"
