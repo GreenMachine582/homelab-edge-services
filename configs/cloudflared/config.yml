@@ -1,3 +1,8 @@
+# Documentation reference — in managed-tunnel mode (--token), cloudflared reads ingress rules
+# from the Cloudflare dashboard, NOT this file. Keep this in sync with what's configured in
+# Cloudflare Zero Trust → Tunnels → your tunnel → Public Hostnames.
+# Backend IPs must be hardcoded (distroless image; no envsubst). Replace EDIT_BEFORE_USE with
+# real backend IPs (ip_svc_02 and ip_svc_03 from inventories/group_vars/all/overrides.yml).
 ingress:
   - hostname: greentechhub.com
     service: http://EDIT_BEFORE_USE:8000
