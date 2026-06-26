@@ -1,0 +1,6 @@
+ingress:
+  - hostname: greentechhub.yourdomain.com
+    service: http://EDIT_BEFORE_USE:8000
+  - hostname: jellyfin.yourdomain.com
+    service: http://EDIT_BEFORE_USE:8096
+  - service: http_status:404

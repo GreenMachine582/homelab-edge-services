@@ -1,0 +1,5 @@
+# IDE
+.idea/
+
+# Secrets — never commit real values
+.env
