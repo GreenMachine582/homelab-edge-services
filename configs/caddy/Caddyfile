@@ -34,3 +34,12 @@ http://greentechhub.homelab.local {
 http://jellyfin.homelab.local {
     reverse_proxy {env.IP_SVC_03}:8096
 }
+
+infisical.homelab.local:8443 {
+    tls internal
+    reverse_proxy infisical:8080
+}
+semaphore.homelab.local:8444 {
+    tls internal
+    reverse_proxy semaphore:3000
+}

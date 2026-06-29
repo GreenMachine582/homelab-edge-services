@@ -21,6 +21,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "8443:8443"   # Infisical HTTPS (Tailscale-only via UFW)
+      - "8444:8444"   # Semaphore HTTPS (Tailscale-only via UFW)
     volumes:
       - ./configs/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
