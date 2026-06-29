@@ -37,9 +37,9 @@ http://jellyfin.homelab.local {
 
 infisical.homelab.local:8443 {
     tls internal
-    reverse_proxy infisical:8080
+    reverse_proxy host.docker.internal:8222
 }
 semaphore.homelab.local:8444 {
     tls internal
-    reverse_proxy semaphore:3000
+    reverse_proxy host.docker.internal:3010
 }

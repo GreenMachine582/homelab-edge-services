@@ -8,3 +8,5 @@
 192.168.50.192 camunda.homelab.local
 192.168.50.192 greentechhub.homelab.local
 192.168.50.192 jellyfin.homelab.local
+192.168.50.192 infisical.homelab.local
+192.168.50.192 semaphore.homelab.local
