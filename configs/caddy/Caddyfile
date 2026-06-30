@@ -35,11 +35,11 @@ http://jellyfin.homelab.local {
     reverse_proxy {env.IP_SVC_03}:8096
 }
 
-infisical.homelab.local:8443 {
+infisical.homelab.local:8443, homelab-edge.local:8443, homelab-edge:8443 {
     tls internal
     reverse_proxy host.docker.internal:8222
 }
-semaphore.homelab.local:8444 {
+semaphore.homelab.local:8444, homelab-edge.local:8444, homelab-edge:8444 {
     tls internal
     reverse_proxy host.docker.internal:3010
 }
