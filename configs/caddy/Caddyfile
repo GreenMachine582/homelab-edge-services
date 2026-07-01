@@ -35,25 +35,14 @@ http://jellyfin.homelab.local {
     reverse_proxy {env.IP_SVC_03}:8096
 }
 
-# Infisical — LAN (tls internal: browser warns without the Caddy CA root installed)
-https://infisical.homelab.local:8443 {
-    tls internal
-    reverse_proxy host.docker.internal:8222
-}
-
-# Infisical — Tailscale (browser-trusted Let's Encrypt cert via `tailscale cert`)
+### Tailscale Routes ###
+# Infisical
 https://homelab-edge.{$TAILNET}.ts.net:8443 {
     tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
     reverse_proxy host.docker.internal:8222
 }
 
-# Semaphore — LAN
-https://semaphore.homelab.local:8444 {
-    tls internal
-    reverse_proxy host.docker.internal:3010
-}
-
-# Semaphore — Tailscale
+# Semaphore
 https://homelab-edge.{$TAILNET}.ts.net:8444 {
     tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
     reverse_proxy host.docker.internal:3010
