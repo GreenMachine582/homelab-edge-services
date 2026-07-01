@@ -40,10 +40,37 @@ This runs `docker compose up -d --remove-orphans` on `homelab-edge`.
 
 Secrets pulled from Infisical at deploy time:
 
-| Env var | Infisical path |
-|---|---|
-| `TUNNEL_TOKEN` | `/production/cloudflare/TUNNEL_TOKEN` |
-| `PIHOLE_WEB_PASSWORD` | `/production/pihole/WEB_PASSWORD` |
+| Env var | Infisical path | Used by |
+|---|---|---|
+| `TUNNEL_TOKEN` | `/production/cloudflare/TUNNEL_TOKEN` | cloudflared |
+| `PIHOLE_WEB_PASSWORD` | `/production/pihole/WEB_PASSWORD` | pihole, pihole-exporter |
+| `IP_OBSERVE` | `/production/network/IP_OBSERVE` | caddy (backend routing) |
+| `IP_SVC_01` | `/production/network/IP_SVC_01` | caddy (backend routing) |
+| `IP_SVC_02` | `/production/network/IP_SVC_02` | caddy (backend routing) |
+| `IP_SVC_03` | `/production/network/IP_SVC_03` | caddy (backend routing) |
+| `TAILNET` | `/production/network/TAILNET` | caddy (Tailscale HTTPS cert hostname) |
+
+---
+
+## Access URLs
+
+### LAN (Pi-hole DNS resolves `*.homelab.local` → `ip_edge`; Caddy proxies to backend)
+
+| Service   | URL                                     | Notes |
+|-----------|-----------------------------------------|-------|
+| Infisical | `https://infisical.homelab.local:8443`  | `tls internal` — browser warns unless Caddy CA root is installed |
+| Semaphore | `https://semaphore.homelab.local:8444`  | `tls internal` — browser warns unless Caddy CA root is installed |
+
+### Tailscale (browser-trusted, no per-device setup)
+
+| Service   | URL                                                          |
+|-----------|--------------------------------------------------------------|
+| Infisical | `https://homelab-edge.<tailnet>.ts.net:8443`                 |
+| Semaphore | `https://homelab-edge.<tailnet>.ts.net:8444`                 |
+
+The `.ts.net` blocks use a Let's Encrypt cert provisioned by `tailscale cert` on `homelab-edge` (managed by the `tailscale` Ansible role, renewed weekly via cron). The `TAILNET` env var (short tailnet name, e.g. `mango-beaver`) is injected at deploy time from Infisical. Requires HTTPS certs enabled in the Tailscale admin console.
+
+Non-browser clients can also reach Infisical directly on port 8222 and Semaphore on port 3010 (Tailscale CGNAT only).
 
 ---
 
