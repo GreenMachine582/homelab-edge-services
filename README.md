@@ -20,6 +20,7 @@ Config-only repo — no custom images are built. All images are upstream.
 | `caddy` | `caddy:2` | LAN reverse proxy (`.homelab.local` hostnames) |
 | `pihole` | `pihole/pihole:latest` | LAN DNS + ad blocking |
 | `pihole-exporter` | `ekofr/pihole-exporter:latest` | Pi-hole metrics for Prometheus |
+| `node-exporter` | `prom/node-exporter:latest` | Host metrics for Prometheus (CPU, memory, disk, network — port 9100) |
 | `portainer-agent` | `portainer/agent:latest` | Container management (connects to Portainer Server on homelab-observe) |
 
 `unbound` is a host systemd service (not containerised). Pi-hole sends upstream DNS to `host.docker.internal:5335`.
