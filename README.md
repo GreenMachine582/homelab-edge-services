@@ -43,13 +43,13 @@ Secrets pulled from Infisical at deploy time:
 
 | Env var | Infisical path | Used by |
 |---|---|---|
-| `TUNNEL_TOKEN` | `/production/cloudflare/TUNNEL_TOKEN` | cloudflared |
-| `PIHOLE_WEB_PASSWORD` | `/production/pihole/WEB_PASSWORD` | pihole, pihole-exporter |
-| `IP_OBSERVE` | `/production/network/IP_OBSERVE` | caddy (backend routing) |
-| `IP_SVC_01` | `/production/network/IP_SVC_01` | caddy (backend routing) |
-| `IP_SVC_02` | `/production/network/IP_SVC_02` | caddy (backend routing) |
-| `IP_SVC_03` | `/production/network/IP_SVC_03` | caddy (backend routing) |
-| `TAILNET` | `/production/network/TAILNET` | caddy (Tailscale HTTPS cert hostname) |
+| `TUNNEL_TOKEN` | `/prod/cloudflare/TUNNEL_TOKEN` | cloudflared |
+| `PIHOLE_WEB_PASSWORD` | `/prod/pihole/WEB_PASSWORD` | pihole, pihole-exporter |
+| `IP_OBSERVE` | `/prod/network/IP_OBSERVE` | caddy (backend routing) |
+| `IP_SVC_01` | `/prod/network/IP_SVC_01` | caddy (backend routing) |
+| `IP_SVC_02` | `/prod/network/IP_SVC_02` | caddy (backend routing) |
+| `IP_SVC_03` | `/prod/network/IP_SVC_03` | caddy (backend routing) |
+| `TAILNET` | `/prod/network/TAILNET` | caddy (Tailscale HTTPS cert hostname) |
 
 ---
 
@@ -113,7 +113,7 @@ Tailscale access uses a Let's Encrypt cert provisioned by `tailscale cert` on `h
 
 Caddy backend IPs (`IP_OBSERVE`, `IP_SVC_01`, `IP_SVC_02`, `IP_SVC_03`) are injected at deploy time from Infisical — no git change needed:
 
-1. Update the value in Infisical (`/production/network/IP_*`).
+1. Update the value in Infisical (`/prod/network/IP_*`).
 2. Deploy:
 
    ```
