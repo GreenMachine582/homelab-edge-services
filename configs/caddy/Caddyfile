@@ -22,6 +22,9 @@ http://uptime.homelab.local {
 http://portainer.homelab.local {
     reverse_proxy {env.IP_OBSERVE}:9000
 }
+http://ntfy.homelab.local {
+    reverse_proxy {env.IP_OBSERVE}:8085
+}
 http://n8n.homelab.local {
     reverse_proxy {env.IP_SVC_01}:5678
 }

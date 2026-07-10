@@ -4,6 +4,7 @@
 192.168.50.192 alertmanager.homelab.local
 192.168.50.192 uptime.homelab.local
 192.168.50.192 portainer.homelab.local
+192.168.50.192 ntfy.homelab.local
 192.168.50.192 n8n.homelab.local
 192.168.50.192 camunda.homelab.local
 192.168.50.192 greentechhub.homelab.local
