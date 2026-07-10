@@ -50,3 +50,39 @@ https://homelab-edge.{$TAILNET}.ts.net:8444 {
     tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
     reverse_proxy host.docker.internal:3010
 }
+
+# Grafana
+https://homelab-edge.{$TAILNET}.ts.net:3000 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:3000
+}
+
+# Prometheus
+https://homelab-edge.{$TAILNET}.ts.net:9090 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:9090
+}
+
+# Alertmanager
+https://homelab-edge.{$TAILNET}.ts.net:9093 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:9093
+}
+
+# Uptime Kuma
+https://homelab-edge.{$TAILNET}.ts.net:3001 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:3001
+}
+
+# Portainer
+https://homelab-edge.{$TAILNET}.ts.net:9000 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:9000
+}
+
+# ntfy
+https://homelab-edge.{$TAILNET}.ts.net:8085 {
+    tls /certs/homelab-edge.{$TAILNET}.ts.net.crt /certs/homelab-edge.{$TAILNET}.ts.net.key
+    reverse_proxy {env.IP_OBSERVE}:8085
+}
