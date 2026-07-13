@@ -12,7 +12,7 @@ Config-only repo — no custom images are built. All images are upstream.
 
 ---
 
-## Services
+## 🧩 Services
 
 | Container | Image | Purpose |
 |---|---|---|
@@ -27,7 +27,7 @@ Config-only repo — no custom images are built. All images are upstream.
 
 ---
 
-## Deploy flow
+## 🚀 Deploy flow
 
 Managed by `deploy-service` in the HomeLab repo. Secrets are injected at deploy time from Infisical — they are never written to this repo or to disk in the checkout.
 
@@ -53,7 +53,7 @@ Secrets pulled from Infisical at deploy time:
 
 ---
 
-## Access URLs
+## 🔗 Access URLs
 
 | Service   | Tailscale (browser-trusted)                          | Direct (non-browser, Tailscale only)  |
 |-----------|------------------------------------------------------|---------------------------------------|
@@ -64,7 +64,7 @@ Tailscale access uses a Let's Encrypt cert provisioned by `tailscale cert` on `h
 
 ---
 
-## Adding a new `.homelab.local` hostname
+## 🏠 Adding a new `.homelab.local` hostname
 
 1. Add a Caddy block to `configs/caddy/Caddyfile`:
 
@@ -90,7 +90,7 @@ Tailscale access uses a Let's Encrypt cert provisioned by `tailscale cert` on `h
 
 ---
 
-## Adding a new public Cloudflare Tunnel route
+## ☁️ Adding a new public Cloudflare Tunnel route
 
 1. Create the public hostname in the Cloudflare Zero Trust dashboard (Tunnels → your tunnel → Public Hostnames).
 
@@ -109,7 +109,7 @@ Tailscale access uses a Let's Encrypt cert provisioned by `tailscale cert` on `h
 
 ---
 
-## IP change procedure
+## 🔁 IP change procedure
 
 Caddy backend IPs (`IP_OBSERVE`, `IP_SVC_01`, `IP_SVC_02`, `IP_SVC_03`) are injected at deploy time from Infisical — no git change needed:
 
@@ -127,7 +127,7 @@ Caddy backend IPs (`IP_OBSERVE`, `IP_SVC_01`, `IP_SVC_02`, `IP_SVC_03`) are inje
 
 ---
 
-## Repository structure
+## 🗂️ Repository structure
 
 ```
 homelab-edge-services/
