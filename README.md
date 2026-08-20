@@ -35,7 +35,7 @@ Managed by `deploy-service` in the HomeLab repo. Secrets are injected at deploy 
 deploy-service deploy homelab-edge-services
 ```
 
-This runs `docker compose up -d --remove-orphans` on `homelab-edge`.
+This runs `docker compose up -d --remove-orphans`, then [`scripts/postdeploy.sh`](./scripts/postdeploy.sh) (auto-discovered by `deploy-service` — no `services.yml` entry needed; it sets Pi-hole's admin password via `pihole setpassword`, since Pi-hole v6 ignores the `WEBPASSWORD` env var), on `homelab-edge`.
 
 > **Critical:** `docker compose down` must never be called for this stack. `cloudflared` is the Cloudflare Tunnel — if it exits, the tunnel drops and remote SSH access is severed immediately. The `rolling` deploy strategy in `services.yml` enforces this.
 
