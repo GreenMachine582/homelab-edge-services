@@ -35,11 +35,11 @@ Managed by `deploy-service` in the HomeLab repo. Secrets are injected at deploy 
 deploy-service deploy homelab-edge-services
 ```
 
-This runs `docker compose up -d --remove-orphans`, then [`scripts/postdeploy.sh`](./scripts/postdeploy.sh) (auto-discovered by `deploy-service` — no `services.yml` entry needed; it sets Pi-hole's admin password via `pihole setpassword`, since Pi-hole v6 ignores the `WEBPASSWORD` env var), on `homelab-edge`.
+This clones/pulls the repo, reads [`secrets.yml`](./secrets.yml) (below) and confirms every secret it declares actually exists in Infisical — if anything's missing, it aborts and prints ready-to-run `infisical secrets set` commands (with a generated value inline for secrets marked `generate: true`) instead of failing deep inside `docker compose up` — then runs `docker compose up -d --remove-orphans`, then [`scripts/postdeploy.sh`](./scripts/postdeploy.sh) (auto-discovered by `deploy-service` — no `services.yml` entry needed; it sets Pi-hole's admin password via `pihole setpassword`, since Pi-hole v6 ignores the `WEBPASSWORD` env var), on `homelab-edge`.
 
 > **Critical:** `docker compose down` must never be called for this stack. `cloudflared` is the Cloudflare Tunnel — if it exits, the tunnel drops and remote SSH access is severed immediately. The `rolling` deploy strategy in `services.yml` enforces this.
 
-Secrets pulled from Infisical at deploy time:
+Declared in [`secrets.yml`](./secrets.yml):
 
 | Env var | Infisical path | Used by |
 |---|---|---|
@@ -133,6 +133,9 @@ Caddy backend IPs (`IP_OBSERVE`, `IP_SVC_01`, `IP_SVC_02`, `IP_SVC_03`) are inje
 homelab-edge-services/
 ├── docker-compose.yml
 ├── .env.example
+├── secrets.yml              # auto-discovered by deploy-service; see "Deploy flow" above
+├── scripts/
+│   └── postdeploy.sh        # auto-discovered by deploy-service (post-deploy)
 └── configs/
     ├── caddy/
     │   └── Caddyfile
